@@ -1,0 +1,181 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 100svh;
+  min-height: max(640px, 100svh);
+  color: var(--on-dark);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--forest-deep);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.image {
+  object-fit: cover;
+  object-position: 38% 60%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .image {
+    animation: settle 2.4s var(--ease-out) both;
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 26, 18, 0.25) 0%, rgba(20, 26, 18, 0) 30%),
+    linear-gradient(0deg, rgba(20, 26, 18, 0.88) 0%, rgba(20, 26, 18, 0.55) 34%, rgba(20, 26, 18, 0) 68%),
+    linear-gradient(90deg, rgba(20, 26, 18, 0.45) 0%, rgba(20, 26, 18, 0) 60%);
+}
+
+.content {
+  position: relative;
+  padding-top: calc(var(--header-h) + 48px);
+  padding-bottom: clamp(88px, 12vh, 132px);
+}
+
+.kicker {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sand-soft);
+}
+
+.title {
+  margin-top: 20px;
+  max-width: 13ch;
+  color: #fbf8f1;
+}
+
+.text {
+  margin-top: 22px;
+  max-width: 34rem;
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--on-dark);
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  padding: 9px 16px;
+  border: 1px solid rgba(243, 238, 227, 0.5);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.buttons {
+  margin-top: 34px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kicker,
+  .title,
+  .text,
+  .location,
+  .buttons {
+    animation: rise 1s var(--ease-out) both;
+  }
+  .title {
+    animation-delay: 0.12s;
+  }
+  .text {
+    animation-delay: 0.24s;
+  }
+  .location {
+    animation-delay: 0.32s;
+  }
+  .buttons {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--on-dark-soft);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scrollCue svg {
+    animation: nudge 2.4s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes nudge {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(4px);
+  }
+}
+
+.tag {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 26px;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
+}
+
+@media (max-width: 559px) {
+  .kicker {
+    letter-spacing: 0.2em;
+  }
+  .buttons :global(.btn) {
+    flex: 1 1 100%;
+  }
+  .tag {
+    bottom: 22px;
+  }
+}
+
+@media (min-width: 900px) {
+  .scrollCue {
+    display: inline-flex;
+  }
+}

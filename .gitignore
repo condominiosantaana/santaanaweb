@@ -1,0 +1,27 @@
+# dependencias
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# entorno y secretos
+.env
+.env*.local
+.env.*
+
+# Vercel
+.vercel
+
+# sistema
+.DS_Store
+Thumbs.db
+npm-debug.log*
+
+# herramientas locales del asistente (skills, configuración de vista previa)
+.agents/
+.claude/
+skills-lock.json

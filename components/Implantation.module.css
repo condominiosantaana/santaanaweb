@@ -1,0 +1,156 @@
+.section {
+  background: var(--ivory);
+}
+
+.head {
+  display: grid;
+  gap: 24px;
+  max-width: 44rem;
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+
+.lots {
+  display: grid;
+  gap: 20px;
+}
+
+.lot {
+  display: grid;
+  gap: 18px;
+  padding: clamp(28px, 4vw, 52px);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.lotDark {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: var(--on-dark);
+}
+
+.lotTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--olive);
+}
+
+.lotDark .icon {
+  border-color: rgba(243, 238, 227, 0.35);
+  color: var(--sand-soft);
+}
+
+.count {
+  font-family: var(--font-serif);
+  font-size: clamp(5.5rem, 12vw, 9rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--olive);
+}
+
+.lotDark .count {
+  color: #fbf8f1;
+}
+
+.lotTitle {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+}
+
+.lotTitle strong {
+  font-weight: 700;
+}
+
+.range {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 8px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.lotDark .range {
+  border-top-color: rgba(243, 238, 227, 0.25);
+}
+
+.range dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.lotDark .range dt {
+  color: var(--sand-soft);
+}
+
+.range dd {
+  margin: 6px 0 0;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.range sup {
+  font-size: 0.55em;
+  line-height: 0;
+}
+
+.plan {
+  display: grid;
+  gap: 22px;
+  align-items: center;
+  margin-top: 20px;
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(84, 101, 77, 0.45);
+}
+
+.planIcon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--olive);
+}
+
+.planText {
+  display: grid;
+  gap: 10px;
+  max-width: 34rem;
+  color: var(--ink-soft);
+}
+
+.planText h3 {
+  color: var(--ink);
+}
+
+@media (min-width: 820px) {
+  .lots {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1080px) {
+  .plan {
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+  }
+}

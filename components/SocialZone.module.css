@@ -1,0 +1,28 @@
+.section {
+  background: var(--ivory);
+}
+
+.head {
+  display: grid;
+  gap: 24px 64px;
+  align-items: end;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.titleCol {
+  display: grid;
+  gap: 22px;
+}
+
+.textCol {
+  display: grid;
+  gap: 16px;
+  color: var(--ink-soft);
+  max-width: 34rem;
+}
+
+@media (min-width: 960px) {
+  .head {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}

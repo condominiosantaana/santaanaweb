@@ -1,0 +1,252 @@
+.form {
+  display: grid;
+  gap: 22px;
+  padding: clamp(24px, 4vw, 48px);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 30px 60px -40px rgba(10, 14, 9, 0.6);
+}
+
+.form :focus-visible {
+  outline-color: var(--olive);
+}
+
+.intro {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.summary {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--error);
+  background: #f8ebe7;
+  color: var(--error);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.row {
+  display: grid;
+  gap: 22px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label,
+.fieldset legend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 16px;
+  border: 1px solid rgba(36, 43, 34, 0.32);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  font-size: 1rem;
+  line-height: 1.4;
+  transition:
+    border-color 0.2s var(--ease-out),
+    box-shadow 0.2s var(--ease-out);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--olive);
+  box-shadow: 0 0 0 3px rgba(84, 101, 77, 0.28);
+}
+
+.field [aria-invalid="true"] {
+  border-color: var(--error);
+  border-width: 2px;
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--error);
+}
+
+.error span {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--error);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.fieldset legend {
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 1px solid rgba(36, 43, 34, 0.32);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition:
+    border-color 0.2s var(--ease-out),
+    background-color 0.2s var(--ease-out);
+}
+
+.option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--olive);
+  flex: none;
+}
+
+.option:has(input:checked) {
+  border-color: var(--olive);
+  background: #f1f3ec;
+  font-weight: 600;
+}
+
+.option:has(input:focus-visible) {
+  outline: 2px solid var(--olive);
+  outline-offset: 2px;
+}
+
+.option input:focus-visible {
+  outline: none;
+}
+
+.fieldset[aria-invalid="true"] .option {
+  border-color: var(--error);
+}
+
+.consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  align-items: start;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.consent input {
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  accent-color: var(--olive);
+}
+
+.consent [aria-invalid="true"] {
+  outline: 2px solid var(--error);
+  outline-offset: 2px;
+}
+
+.consent a {
+  color: var(--olive);
+  font-weight: 600;
+}
+
+.consent .error {
+  grid-column: 1 / -1;
+}
+
+.notice {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+}
+
+.submit {
+  width: 100%;
+}
+
+.submit svg {
+  width: 20px;
+  height: 20px;
+}
+
+.handoff {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--olive);
+  background: #eef1e8;
+  font-size: 0.92rem;
+}
+
+.handoff a {
+  color: var(--olive);
+  font-weight: 600;
+  justify-self: start;
+}
+
+@media (min-width: 640px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .option {
+    align-items: flex-start;
+  }
+  .option input {
+    margin-top: 2px;
+  }
+}

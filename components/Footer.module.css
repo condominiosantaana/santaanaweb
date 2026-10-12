@@ -1,0 +1,110 @@
+.footer {
+  background: var(--forest-deep);
+  color: var(--on-dark-soft);
+  font-size: 0.92rem;
+  padding-top: clamp(64px, 8vw, 104px);
+  /* espacio para el botón flotante en móvil */
+  padding-bottom: 88px;
+}
+
+.top {
+  display: grid;
+  gap: 44px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.brand {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  justify-items: start;
+}
+
+.logo {
+  display: block;
+  width: 168px;
+  border-radius: 4px;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.slogan {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--sand);
+}
+
+.col {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.heading {
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sand);
+}
+
+.col a {
+  display: inline-block;
+  padding-block: 5px;
+  text-decoration: none;
+  color: var(--on-dark);
+  text-underline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .col a:hover {
+    text-decoration: underline;
+  }
+}
+
+.bottom {
+  display: grid;
+  gap: 12px;
+  padding-top: 28px;
+  font-size: 0.8rem;
+}
+
+.disclaimer {
+  max-width: 52rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 720px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1080px) {
+  .footer {
+    padding-bottom: 40px;
+  }
+  .top {
+    grid-template-columns: 1.4fr 1fr 0.8fr 0.9fr;
+  }
+  .bottom {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+}

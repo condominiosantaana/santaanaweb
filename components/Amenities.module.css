@@ -1,0 +1,132 @@
+.section {
+  background: var(--paper);
+}
+
+.head {
+  display: grid;
+  gap: 22px;
+  max-width: 44rem;
+  margin-bottom: clamp(44px, 6vw, 72px);
+}
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+}
+
+.card article {
+  display: grid;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 1.1s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card:hover .image {
+    transform: scale(1.04);
+  }
+}
+
+.body {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 24px 26px 30px;
+  color: var(--ink-soft);
+}
+
+.cardTitle {
+  font-size: 1.55rem;
+  color: var(--ink);
+}
+
+.list {
+  list-style: none;
+  margin: clamp(40px, 6vw, 64px) 0 0;
+  padding: 0;
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.list li {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.list svg {
+  color: var(--olive);
+}
+
+.listTitle {
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: clamp(40px, 5vw, 56px);
+}
+
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .wide {
+    grid-column: 1 / -1;
+  }
+  .wide .media {
+    aspect-ratio: 16 / 9;
+  }
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+}
+
+@media (min-width: 960px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .card article {
+    grid-template-rows: auto 1fr;
+  }
+  /* La tarjeta destacada ocupa dos columnas y adopta la altura de su fila */
+  .wide {
+    grid-column: span 2;
+  }
+  .wide article {
+    grid-template-rows: 1fr auto;
+  }
+  .wide .media {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+  .wide .cardTitle {
+    font-size: 2rem;
+  }
+  .list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+}
