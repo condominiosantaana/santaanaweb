@@ -45,6 +45,12 @@ export const NAV: NavItem[] = [
   { href: "/#contacto", label: "Contacto" },
 ];
 
+export const SOCIAL = {
+  facebook: "https://www.facebook.com/profile.php?id=61558592373985",
+  instagram: "https://www.instagram.com/km2sirivana/",
+  tiktok: "https://vt.tiktok.com/ZSbby1KU1/",
+} as const;
+
 export const LEGAL_LINKS: NavItem[] = [
   { href: "/politica-de-privacidad", label: "Política de Privacidad" },
   { href: "/terminos-y-condiciones", label: "Términos y Condiciones" },

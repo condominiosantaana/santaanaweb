@@ -1,0 +1,132 @@
+/* 680 px o más: a media altura del borde derecho */
+.rail {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  top: 50%;
+  z-index: 40;
+  transform: translateY(-50%);
+  transition:
+    opacity 0.3s var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+.rail ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(228, 217, 195, 0.6);
+  background: rgba(33, 42, 30, 0.62);
+  color: var(--ivory);
+  box-shadow: 0 8px 18px -10px rgba(10, 14, 9, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    background-color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+}
+
+.icon {
+  width: 19px;
+  height: 19px;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+/* Etiqueta breve al pasar el cursor (complementaria: el nombre accesible ya está en el enlace) */
+.tip {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--forest);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  box-shadow: 0 6px 14px -8px rgba(10, 14, 9, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(4px, -50%);
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    background: rgba(33, 42, 30, 0.88);
+    border-color: var(--sand-soft);
+    transform: translateY(-2px);
+  }
+  .link:hover .tip {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+.link:focus-visible .tip {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.rail[data-hidden] {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s var(--ease-out),
+    visibility 0s linear 0.3s;
+}
+
+/* Móvil: fila compacta bajo la cabecera, a la derecha, sobre la zona de imagen de la portada.
+   No tapa el texto ni los botones de la portada (que ocupan todo el ancho) ni el botón de WhatsApp. */
+@media (max-width: 679px) {
+  .rail {
+    top: calc(var(--header-h) + 8px);
+    right: max(12px, env(safe-area-inset-right));
+    transform: none;
+  }
+  .rail ul {
+    flex-direction: row;
+    gap: 8px;
+  }
+  .link {
+    width: 40px;
+    height: 40px;
+  }
+  .icon {
+    width: 17px;
+    height: 17px;
+  }
+  .tip {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .tip {
+    transition: none;
+  }
+  .link:hover {
+    transform: none;
+  }
+}

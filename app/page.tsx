@@ -10,6 +10,7 @@ import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SocialRail from "@/components/SocialRail";
 import RevealObserver from "@/components/RevealObserver";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <SocialRail />
       <WhatsAppButton />
       <RevealObserver />
     </>
