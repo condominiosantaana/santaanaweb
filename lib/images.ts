@@ -1,15 +1,15 @@
 import type { StaticImageData } from "next/image";
 
-import arbolNativo from "@/public/images/renders/arbol-nativo.jpg";
-import lagoZonaSocial from "@/public/images/renders/lago-zona-social.jpg";
-import salonSocialLago from "@/public/images/renders/salon-social-lago.jpg";
-import terrazaPergola from "@/public/images/renders/terraza-pergola.jpg";
-import porteria from "@/public/images/renders/porteria.jpg";
-import casaDelArbol from "@/public/images/renders/casa-del-arbol.jpg";
-import parqueInfantil from "@/public/images/renders/parque-infantil.jpg";
-import parquePergola from "@/public/images/renders/parque-pergola.jpg";
-import canchaPadel from "@/public/images/renders/cancha-padel.jpg";
-import oratorio from "@/public/images/renders/oratorio.jpg";
+import arbolNativo from "@/public/images/renders/arbol-nativo.webp";
+import lagoZonaSocial from "@/public/images/renders/lago-zona-social.webp";
+import salonSocialLago from "@/public/images/renders/salon-social-lago.webp";
+import terrazaPergola from "@/public/images/renders/terraza-pergola.webp";
+import porteria from "@/public/images/renders/porteria.webp";
+import casaDelArbol from "@/public/images/renders/casa-del-arbol.webp";
+import parqueInfantil from "@/public/images/renders/parque-infantil.webp";
+import parquePergola from "@/public/images/renders/parque-pergola.webp";
+import canchaPadel from "@/public/images/renders/cancha-padel.webp";
+import oratorio from "@/public/images/renders/oratorio.webp";
 import llanoArbol from "@/public/images/paisaje/llano-arbol.jpg";
 import llanoFamilia from "@/public/images/paisaje/llano-familia.jpg";
 

@@ -26,3 +26,6 @@ npm-debug.log*
 .claude/
 skills-lock.json
 .env*
+
+# variantes de imágenes regenerables con scripts/optimize-renders.mjs
+IMAGENES RENDER/IMAGENES OPTIMIZADAS WEB/

@@ -1,5 +1,6 @@
 import { SITE } from "@/lib/site";
 import { ArrowRight, MapPin, School, Services, ShoppingBag, Sport } from "./Icons";
+import MapEmbed from "./MapEmbed";
 import styles from "./Location.module.css";
 
 const CONNECTIONS = [
@@ -9,8 +10,12 @@ const CONNECTIONS = [
   { icon: Services, label: "Servicios esenciales" },
 ];
 
-// Búsqueda de la vía en Google Maps: no fija un punto ni presenta coordenadas como entrada del condominio.
-const MAPS_SEARCH = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Vía Sirivana, Yopal, Casanare")}`;
+// No hay coordenadas oficiales del condominio. El mapa muestra una vista de Yopal y su entorno oriental
+// (centro y zoom, sin marcador) para orientar al visitante sin señalar un punto como la entrada del proyecto.
+// La búsqueda "Vía Sirivana, Yopal" de Google resuelve a una ficha de terceros, por eso no se usa.
+const MAP_VIEW = { lat: 5.345, lng: -72.37, zoom: 12 };
+const MAP_EMBED = `https://maps.google.com/maps?ll=${MAP_VIEW.lat},${MAP_VIEW.lng}&z=${MAP_VIEW.zoom}&t=m&hl=es&output=embed`;
+const MAP_LINK = `https://www.google.com/maps/@${MAP_VIEW.lat},${MAP_VIEW.lng},${MAP_VIEW.zoom}z`;
 
 export default function Location() {
   return (
@@ -43,22 +48,15 @@ export default function Location() {
           </ul>
         </div>
 
-        <aside className={styles.card} aria-label="Distancia y sala de ventas" data-reveal>
-          <div className={styles.route} aria-hidden="true">
-            <span className={styles.stop}>Yopal</span>
-            <span className={styles.track}>
-              <span className={styles.dot} />
-              <span className={styles.line} />
-              <span className={`${styles.dot} ${styles.dotEnd}`} />
-            </span>
-            <span className={`${styles.stop} ${styles.stopEnd}`}>Santa ANA</span>
-          </div>
-
-          <p className={styles.minutes}>
-            <span className={styles.number}>10</span>
-            <span className={styles.unit}>minutos</span>
+        <aside className={styles.card} aria-label="Mapa y sala de ventas" data-reveal>
+          <MapEmbed
+            src={MAP_EMBED}
+            title="Mapa de referencia de Yopal y su entorno, en Google Maps"
+            className={styles.map}
+          />
+          <p className={styles.mapNote}>
+            Vista de referencia de Yopal y su entorno. El mapa no señala la ubicación exacta del condominio.
           </p>
-          <p className={styles.minutesText}>del casco urbano de Yopal por la vía Sirivana.</p>
 
           <div className={styles.sales}>
             <MapPin width={20} height={20} />
@@ -68,14 +66,11 @@ export default function Location() {
             </div>
           </div>
 
-          <a href={MAPS_SEARCH} className="btn btn--light" target="_blank" rel="noopener noreferrer">
-            Ver la vía en Google Maps
+          <a href={MAP_LINK} className="btn btn--light" target="_blank" rel="noopener noreferrer">
+            Ver ubicación en Google Maps
             <ArrowRight />
             <span className="visually-hidden">(se abre en una pestaña nueva)</span>
           </a>
-          <p className={styles.note}>
-            El enlace abre una búsqueda de la vía Sirivana; no señala la entrada exacta del condominio.
-          </p>
         </aside>
       </div>
     </section>

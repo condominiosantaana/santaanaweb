@@ -40,8 +40,20 @@ scripts/prepare-images.mjs   Regenera esas versiones (`npm run images`)
 ```
 
 Los archivos originales (`IMAGENES RENDER`, `IMAGENES INSPIRACION`, `LOGO SANTAANA`, `linea grafica web-0X.jpg`)
-no se modifican. Si el cliente entrega renders nuevos o de mayor resolución, reemplace el original y ejecute
-`npm run images`.
+no se modifican.
+
+### Renders
+
+- Fuente: los PNG sin pérdida de 1536 × 1024 de `IMAGENES RENDER/IMAGENES OPTMINZAR`.
+- `npm run images` genera `public/images/renders/*.webp`, en WebP de alta fidelidad. A partir de ahí Next.js sirve
+  AVIF/WebP al tamaño de cada pantalla.
+- `node scripts/optimize-renders.mjs` genera variantes independientes (WebP 1536/1024/640/320 y AVIF 1536/1024).
+  También crea un informe y una hoja comparativa en `IMAGENES RENDER/IMAGENES OPTIMIZADAS WEB`.
+- Si llegan renders de mayor resolución, póngalos en `IMAGENES OPTMINZAR` con el mismo nombre y vuelva a ejecutar
+  ambos scripts.
+
+**Revertir a los JPG anteriores:** en `lib/images.ts` cambie la extensión de las importaciones de
+`public/images/renders/*.webp` a `.jpg`. Los JPG anteriores siguen en esa carpeta.
 
 ## Formulario de contacto
 

@@ -10,6 +10,8 @@ const csp = [
   "img-src 'self' data: blob:",
   "font-src 'self'",
   "connect-src 'self'",
+  // Mapa de Google Maps insertado en la sección de ubicación.
+  "frame-src https://www.google.com https://maps.google.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

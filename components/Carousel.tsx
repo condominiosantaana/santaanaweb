@@ -180,6 +180,7 @@ export default function Carousel({
                     alt={photo.alt}
                     fill
                     sizes={sizes}
+                    quality={85}
                     placeholder="blur"
                     className={styles.image}
                     draggable={false}

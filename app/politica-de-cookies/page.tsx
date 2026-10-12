@@ -20,13 +20,18 @@ export default function CookiesPage() {
 
       <h2>2. Cookies que utiliza este sitio</h2>
       <p>
-        En su versión actual, el sitio de {SITE.name} <strong>no instala cookies</strong> propias ni de terceros. No
-        utiliza herramientas de analítica, publicidad, píxeles de seguimiento ni redes sociales integradas. Por eso no
-        muestra un aviso de consentimiento de cookies.
+        El sitio de {SITE.name} <strong>no instala cookies propias</strong>. No utiliza herramientas de analítica,
+        publicidad, píxeles de seguimiento ni redes sociales integradas.
       </p>
       <p>
-        Las tipografías y las imágenes se sirven desde el propio dominio del sitio, sin conexiones a servicios de
-        terceros durante la navegación.
+        Las tipografías y las imágenes se sirven desde el propio dominio del sitio. La única excepción es el mapa de la
+        sección de ubicación: es un mapa de <strong>Google Maps</strong> insertado que se carga desde los servidores
+        de Google cuando esa sección se muestra en pantalla. Al cargarse, Google puede recibir datos técnicos de su
+        navegador (como la dirección IP) y utilizar cookies o tecnologías similares, según la{" "}
+        <a href="https://policies.google.com/technologies/cookies?hl=es" target="_blank" rel="noopener noreferrer">
+          política de cookies de Google
+        </a>
+        . Puede bloquear las cookies de terceros desde la configuración de su navegador.
       </p>
 
       <h2>3. Almacenamiento en el navegador</h2>
@@ -37,8 +42,8 @@ export default function CookiesPage() {
 
       <h2>4. Servicios externos enlazados</h2>
       <p>
-        Al pulsar un botón de WhatsApp o el enlace a Google Maps, usted sale del sitio y accede a servicios de
-        terceros que pueden usar sus propias cookies según sus políticas.
+        Al pulsar un botón de WhatsApp o el enlace «Ver ubicación en Google Maps», usted sale del sitio y accede a
+        servicios de terceros que pueden usar sus propias cookies según sus políticas.
       </p>
 
       <h2>5. Datos técnicos del alojamiento</h2>

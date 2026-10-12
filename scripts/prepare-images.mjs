@@ -11,17 +11,21 @@ const out = (...p) => path.join(root, ...p);
 const IVORY = { r: 247, g: 243, b: 234 };
 const FOREST = { r: 47, g: 58, b: 43 };
 
+// Renders: se generan a partir de los maestros PNG sin pérdida (1536 × 1024) de "IMAGENES OPTMINZAR".
+// Se guardan como WebP de alta fidelidad para que Next.js derive las variantes AVIF/WebP sin acumular pérdidas.
+// Los JPG anteriores (generados desde los JPG de ~920 px) se conservan en public/images/renders para poder revertir.
+const RENDER_SRC = out("IMAGENES RENDER", "IMAGENES OPTMINZAR");
 const renders = {
-  "Parque-dorado-junto-al-árbol-gigante.jpg": "arbol-nativo.jpg",
-  "Resort-tropical-al-atardecer.jpg": "lago-zona-social.jpg",
-  "Pabellón-Dorado-junto-al-Lago.jpg": "salon-social-lago.jpg",
-  "Lounge-tropical-al-atardecer-bajo-pérgola.jpg": "terraza-pergola.jpg",
-  "Entrada-tropical-de-lujo-al-atardecer.jpg": "porteria.jpg",
-  "Parque-dorado-con-casa-del-árbol.jpg": "casa-del-arbol.jpg",
-  "Parque-infantil-al-atardecer-familiar.jpg": "parque-infantil.jpg",
-  "Parque-al-atardecer-bajo-la-pérgola-verde.jpg": "parque-pergola.jpg",
-  "Cancha-tropical-al-atardecer.jpg": "cancha-padel.jpg",
-  "Capilla-tropical-al-atardecer.jpg": "oratorio.jpg",
+  "Parque dorado junto al árbol gigante.png": "arbol-nativo.webp",
+  "Resort tropical al atardecer.png": "lago-zona-social.webp",
+  "Pabellón Dorado junto al Lago.png": "salon-social-lago.webp",
+  "Lounge tropical al atardecer bajo pérgola.png": "terraza-pergola.webp",
+  "Entrada tropical de lujo al atardecer.png": "porteria.webp",
+  "Parque dorado con casa del árbol.png": "casa-del-arbol.webp",
+  "Parque infantil al atardecer familiar.png": "parque-infantil.webp",
+  "Parque al atardecer bajo la pérgola verde.png": "parque-pergola.webp",
+  "Cancha tropical al atardecer.png": "cancha-padel.webp",
+  "Capilla tropical al atardecer.png": "oratorio.webp",
 };
 
 // Fotografías de ambiente (no muestran instalaciones del proyecto).
@@ -52,8 +56,8 @@ async function main() {
   await mkdir(out("public", "brand"), { recursive: true });
 
   for (const [src, dest] of Object.entries(renders)) {
-    await sharp(out("IMAGENES RENDER", src))
-      .jpeg({ quality: 86, mozjpeg: true })
+    await sharp(path.join(RENDER_SRC, src))
+      .webp({ quality: 95, effort: 6, smartSubsample: true })
       .toFile(out("public", "images", "renders", dest));
   }
   for (const [src, dest] of Object.entries(paisajes)) {
@@ -85,7 +89,7 @@ async function main() {
   const shade = Buffer.from(
     `<svg width="1200" height="630"><rect width="1200" height="630" fill="rgb(${FOREST.r},${FOREST.g},${FOREST.b})" fill-opacity="0.55"/></svg>`,
   );
-  await sharp(out("IMAGENES RENDER", "Resort-tropical-al-atardecer.jpg"))
+  await sharp(path.join(RENDER_SRC, "Resort tropical al atardecer.png"))
     .resize(1200, 630, { fit: "cover", position: "centre" })
     .composite([{ input: shade }, { input: ivoryLogo, gravity: "centre" }])
     .jpeg({ quality: 85, mozjpeg: true })
