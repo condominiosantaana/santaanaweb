@@ -3,23 +3,23 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import type { Photo } from "@/lib/images";
-import { ChevronLeft, ChevronRight, Close, Expand } from "./Icons";
+import { ChevronLeft, ChevronRight, Close, Expand, Plan as PlanIcon } from "./Icons";
 import { photoTag } from "./Photo";
 import zoom from "./Carousel.module.css";
 import styles from "./PlanViewer.module.css";
 
 type Props = {
-  /** El primer plano es el principal; el segundo, el complemento. */
+  /** El primer plano es el que se muestra en el panel; los demás se recorren dentro del visor. */
   plans: Photo[];
-  /** Contenido que acompaña al plano complementario (texto de la sección). */
-  children?: React.ReactNode;
+  /** Nota breve bajo la miniatura. */
+  note?: React.ReactNode;
 };
 
 /**
- * Planos de zonificación con visor ampliado accesible (<dialog> nativo: Escape, foco y capa superior).
- * El visor permite ajustar el plano a la pantalla o verlo a tamaño real y recorrerlo con desplazamiento.
+ * Panel compacto con el plano de implantación y visor ampliado accesible (<dialog> nativo: Escape, foco y
+ * capa superior). El visor permite ajustar el plano a la pantalla o verlo a tamaño real y recorrerlo.
  */
-export default function PlanViewer({ plans, children }: Props) {
+export default function PlanViewer({ plans, note }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const [index, setIndex] = useState(0);
@@ -27,6 +27,7 @@ export default function PlanViewer({ plans, children }: Props) {
   const [actualSize, setActualSize] = useState(false);
   const current = plans[index];
   const total = plans.length;
+  const plan = plans[0];
 
   const openAt = (i: number, trigger: HTMLButtonElement) => {
     triggerRef.current = trigger;
@@ -40,39 +41,40 @@ export default function PlanViewer({ plans, children }: Props) {
     setActualSize(false);
   };
 
-  const figure = (photo: Photo, i: number, main: boolean) => (
-    <figure className={`${styles.figure} ${main ? styles.main : ""}`} data-reveal="plan">
-      <button type="button" className={styles.trigger} onClick={(e) => openAt(i, e.currentTarget)}>
-        <span className={styles.frame}>
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            fill
-            placeholder="blur"
-            sizes={main ? "(min-width: 1024px) 60vw, 92vw" : "(min-width: 1024px) 38vw, 92vw"}
-            quality={85}
-            className={styles.image}
-          />
-          <span className="image-tag">{photoTag(photo)}</span>
-          <span className={styles.zoomHint} aria-hidden="true">
-            <Expand width={16} height={16} />
-            Ampliar
-          </span>
-        </span>
-        <span className="visually-hidden">Ampliar: {photo.caption}</span>
-      </button>
-      <figcaption className={styles.caption}>{photo.caption}</figcaption>
-    </figure>
-  );
-
   return (
     <>
-      <div className={styles.grid}>
-        {figure(plans[0], 0, true)}
-        <div className={styles.side}>
-          {plans[1] && figure(plans[1], 1, false)}
-          {children}
+      <div className={styles.panel}>
+        <div className={styles.panelHead}>
+          <span className={styles.panelIcon}>
+            <PlanIcon width={20} height={20} />
+          </span>
+          <div className={styles.panelText}>
+            <p className={styles.panelLabel}>Plano de implantación</p>
+            <p className={styles.panelHint}>Consulta la distribución del proyecto.</p>
+          </div>
         </div>
+        <div className={styles.thumb}>
+          <button type="button" className={styles.trigger} onClick={(e) => openAt(0, e.currentTarget)}>
+            <span className={styles.frame}>
+              <Image
+                src={plan.src}
+                alt={plan.alt}
+                fill
+                placeholder="blur"
+                sizes="(min-width: 1200px) 480px, 92vw"
+                quality={85}
+                className={styles.image}
+              />
+              <span className="image-tag">{photoTag(plan)}</span>
+            </span>
+            <span className="visually-hidden">Ver ampliado: {plan.caption}</span>
+          </button>
+          <button type="button" className={styles.expandBtn} onClick={(e) => openAt(0, e.currentTarget)}>
+            <Expand width={15} height={15} />
+            Ampliar plano
+          </button>
+        </div>
+        {note && <p className={styles.note}>{note}</p>}
       </div>
 
       <dialog

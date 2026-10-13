@@ -1,0 +1,110 @@
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--forest-deep);
+}
+
+.fallback,
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 50%;
+}
+
+/* El video aparece con un fundido suave cuando ya se está reproduciendo */
+.video {
+  opacity: 0;
+  transition: opacity 1s var(--ease-out);
+}
+
+.video[data-playing] {
+  opacity: 1;
+}
+
+/* Degradado verde bosque: más intenso a la izquierda (texto y tarjetas) y en los bordes superior e inferior */
+.shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(20, 26, 18, 0.86) 0%, rgba(20, 26, 18, 0.62) 42%, rgba(20, 26, 18, 0.34) 72%, rgba(20, 26, 18, 0.42) 100%),
+    linear-gradient(180deg, rgba(20, 26, 18, 0.55) 0%, rgba(20, 26, 18, 0) 26%, rgba(20, 26, 18, 0) 70%, rgba(20, 26, 18, 0.6) 100%);
+}
+
+/* Alineado con la etiqueta de la sección y por debajo de la cabecera fija */
+.soundWrap {
+  position: absolute;
+  top: calc(clamp(96px, 9vw, 120px) - 10px);
+  right: clamp(20px, 4vw, 56px);
+  z-index: 3;
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
+.sound {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(228, 217, 195, 0.55);
+  background: rgba(20, 26, 18, 0.55);
+  color: var(--ivory);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    background-color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sound:hover {
+    background: rgba(20, 26, 18, 0.82);
+    border-color: var(--sand-soft);
+  }
+}
+
+.sound:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: 3px;
+}
+
+.sound[aria-pressed="true"] {
+  background: rgba(200, 184, 150, 0.28);
+  border-color: var(--sand);
+}
+
+.soundStatus:empty {
+  display: none;
+}
+
+.soundStatus {
+  max-width: 220px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(20, 26, 18, 0.8);
+  color: var(--on-dark);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+/* Móvil y tableta: degradado más uniforme para priorizar la legibilidad */
+@media (max-width: 1199px) {
+  .shade {
+    background:
+      linear-gradient(180deg, rgba(20, 26, 18, 0.78) 0%, rgba(20, 26, 18, 0.66) 40%, rgba(20, 26, 18, 0.8) 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    transition: none;
+  }
+}

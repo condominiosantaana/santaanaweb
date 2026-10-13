@@ -1,19 +1,111 @@
-.grid {
+/* Panel compacto del plano sobre el video */
+.panel {
   display: grid;
-  gap: 20px;
-  align-items: start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(228, 217, 195, 0.3);
+  background: rgba(20, 26, 18, 0.58);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 24px 48px -32px rgba(0, 0, 0, 0.7);
+  color: var(--on-dark);
 }
 
-.side {
-  display: grid;
-  gap: 24px;
-  align-content: start;
+.panelHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 4px 0;
 }
 
-.figure {
-  margin: 0;
+.panelIcon {
   display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(228, 217, 195, 0.35);
+  color: var(--sand-soft);
+}
+
+.panelText {
+  flex: 1;
+  min-width: 0;
+}
+
+.panelLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sand);
+}
+
+.panelHint {
+  font-size: 0.84rem;
+  color: var(--on-dark-soft);
+}
+
+.thumb {
+  position: relative;
+}
+
+.note {
+  display: flex;
+  align-items: flex-start;
   gap: 10px;
+  padding: 0 4px 2px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--on-dark-soft);
+}
+
+.note svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--sand-soft);
+}
+
+/* Botón real, superpuesto a la miniatura (no anidado en el botón de la imagen) */
+.expandBtn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(228, 217, 195, 0.5);
+  background: rgba(20, 26, 18, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--ivory);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .expandBtn:hover {
+    background: rgba(20, 26, 18, 0.9);
+    border-color: var(--sand-soft);
+  }
+}
+
+.expandBtn:focus-visible,
+.trigger:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: 3px;
 }
 
 .trigger {
@@ -23,58 +115,28 @@
   border: 0;
   background: none;
   cursor: zoom-in;
-  border-radius: var(--radius-lg);
-}
-
-.trigger:focus-visible {
-  outline: 2px solid var(--olive);
-  outline-offset: 4px;
+  border-radius: var(--radius-md);
 }
 
 .frame {
   position: relative;
   display: block;
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  /* Proporción original de los planos (2688 × 1790): sin recortes */
+  border-radius: var(--radius-md);
+  /* Proporción original del plano (2688 × 1790): sin recortes */
   aspect-ratio: 2688 / 1790;
-  background: var(--cream);
+  background: var(--forest-deep);
 }
 
 .image {
   object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
 }
 
-.zoomHint {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(33, 42, 30, 0.7);
-  color: var(--on-dark);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  transition: background-color 0.25s var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .trigger:hover .zoomHint {
-    background: rgba(33, 42, 30, 0.9);
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .trigger:hover .image {
+    transform: scale(1.02);
   }
-}
-
-.caption {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--ink-soft);
 }
 
 /* Visor: plano a tamaño real con desplazamiento */
@@ -124,9 +186,3 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: 1.55fr 1fr;
-    gap: 28px;
-  }
-}
