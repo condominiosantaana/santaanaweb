@@ -1,7 +1,7 @@
 .form {
   display: grid;
-  gap: 22px;
-  padding: clamp(24px, 4vw, 48px);
+  gap: 16px;
+  padding: clamp(18px, 3vw, 34px);
   border-radius: var(--radius-lg);
   background: var(--paper);
   color: var(--ink);
@@ -13,7 +13,7 @@
 }
 
 .intro {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--ink-soft);
 }
 
@@ -29,12 +29,12 @@
 
 .row {
   display: grid;
-  gap: 22px;
+  gap: 16px 14px;
 }
 
 .field {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .field label,
@@ -52,8 +52,8 @@
 .field input,
 .field textarea {
   width: 100%;
-  min-height: 52px;
-  padding: 13px 16px;
+  min-height: 46px;
+  padding: 10px 14px;
   border: 1px solid rgba(36, 43, 34, 0.32);
   border-radius: var(--radius-sm);
   background: #fff;
@@ -66,7 +66,7 @@
 
 .field textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 92px;
 }
 
 .field input:focus-visible,
@@ -115,39 +115,40 @@
   padding: 0;
   border: 0;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .fieldset legend {
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .options {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .option {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 52px;
-  padding: 12px 16px;
+  gap: 10px;
+  min-height: 44px;
+  padding: 9px 12px;
   border: 1px solid rgba(36, 43, 34, 0.32);
   border-radius: var(--radius-sm);
   background: #fff;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  line-height: 1.35;
   transition:
     border-color 0.2s var(--ease-out),
     background-color 0.2s var(--ease-out);
 }
 
 .option input {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   margin: 0;
   accent-color: var(--olive);
   flex: none;
@@ -177,8 +178,8 @@
   grid-template-columns: auto 1fr;
   gap: 8px 12px;
   align-items: start;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.86rem;
+  line-height: 1.5;
 }
 
 .consent input {
@@ -203,10 +204,10 @@
 }
 
 .notice {
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: 0.78rem;
+  line-height: 1.55;
   color: var(--ink-soft);
-  padding: 14px 16px;
+  padding: 10px 14px;
   border-radius: var(--radius-sm);
   background: var(--ivory);
 }

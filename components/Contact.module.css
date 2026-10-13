@@ -71,6 +71,8 @@
 }
 
 .formWrap {
+  width: 100%;
+  max-width: 620px;
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
 
@@ -81,5 +83,8 @@
   .copy {
     position: sticky;
     top: calc(var(--header-h) + 40px);
+  }
+  .formWrap {
+    justify-self: end;
   }
 }

@@ -245,7 +245,7 @@ export default function ContactForm() {
         <textarea
           id={fid("mensaje")}
           name="mensaje"
-          rows={4}
+          rows={3}
           maxLength={MAX_MESSAGE}
           value={values.mensaje}
           onChange={(e) => update("mensaje", e.target.value)}

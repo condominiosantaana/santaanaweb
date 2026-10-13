@@ -96,25 +96,16 @@
     visibility 0s linear 0.3s;
 }
 
-/* Móvil: fila compacta bajo la cabecera, a la derecha, sobre la zona de imagen de la portada.
-   No tapa el texto ni los botones de la portada (que ocupan todo el ancho) ni el botón de WhatsApp. */
+/* Móvil: columna vertical centrada sobre el botón de WhatsApp (58 × 56 px, a 16 px de la esquina) y 12 px por encima de él */
 @media (max-width: 679px) {
   .rail {
-    top: calc(var(--header-h) + 8px);
-    right: max(12px, env(safe-area-inset-right));
+    top: auto;
+    right: calc(max(16px, env(safe-area-inset-right)) + 7px);
+    bottom: calc(max(16px, env(safe-area-inset-bottom)) + 56px + 12px);
     transform: none;
   }
   .rail ul {
-    flex-direction: row;
     gap: 8px;
-  }
-  .link {
-    width: 40px;
-    height: 40px;
-  }
-  .icon {
-    width: 17px;
-    height: 17px;
   }
   .tip {
     display: none;
