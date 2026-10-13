@@ -36,11 +36,14 @@ export default function About() {
         </div>
 
         <div className={styles.visual}>
+          {/* Caja 4:5 con un render 3:2 en "cover": la imagen se pinta ~1,875 veces más ancha que la caja,
+              por eso "sizes" declara ese ancho real (si no, el navegador descarga una versión pequeña y la amplía). */}
           <Photo
-            photo={PHOTOS.lagoZonaSocial}
+            photo={PHOTOS.salonSocialLago}
             ratio="4 / 5"
             className={styles.main}
-            sizes="(min-width: 960px) 40vw, 92vw"
+            sizes="(min-width: 960px) 76vw, 172vw"
+            quality={85}
           />
           <Photo
             photo={PHOTOS.llanoArbol}
