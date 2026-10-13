@@ -49,7 +49,7 @@ export default function Contact() {
           </ul>
         </div>
 
-        <div id="formulario" className={styles.formWrap}>
+        <div id="formulario" className={styles.formWrap} data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
           <h3 className="visually-hidden">Formulario de solicitud de información</h3>
           <ContactForm />
         </div>

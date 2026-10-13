@@ -6,6 +6,9 @@
 // Para cada imagen se elige la calidad más baja que mantiene una fidelidad de luminancia >= 40 dB (PSNR-Y,
 // la componente que el ojo percibe como nitidez) frente al original al mismo tamaño. Se informa también el
 // PSNR en RGB. Nunca se amplía por encima de la resolución nativa.
+// Si el original supera 1536 px se conserva además una versión a su ancho nativo (para ampliar planos), y en
+// todos los casos se genera un JPEG optimizado al ancho mayor como alternativa compatible.
+// Los planos (nombre con "zonific") usan un umbral más exigente para proteger líneas finas y límites.
 import sharp from "sharp";
 import { existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -14,11 +17,13 @@ const root = path.resolve(import.meta.dirname, "..");
 const SRC = path.join(root, "IMAGENES RENDER", "IMAGENES OPTMINZAR");
 const OUT = path.join(root, "IMAGENES RENDER", "IMAGENES OPTIMIZADAS WEB");
 const TARGET_DB = 40;
+const TARGET_DB_PLAN = 42;
 
 const WIDTHS = [1536, 1024, 640, 320];
 const AVIF_WIDTHS = [1536, 1024];
 const WEBP_Q = [78, 82, 86, 90, 94];
 const AVIF_Q = [55, 60, 65, 70, 76, 82, 88];
+const JPEG_Q = [80, 84, 88, 92, 95];
 
 function psnr(a, b) {
   let se = 0;
@@ -33,26 +38,27 @@ function psnr(a, b) {
 const rawOf = (buf) => sharp(buf).removeAlpha().raw().toBuffer();
 const lumaOf = (buf) => sharp(buf).removeAlpha().greyscale().raw().toBuffer();
 
-async function encode(ref, format, quality) {
+async function encode(ref, format, quality, plan = false) {
   const img = sharp(ref);
-  return format === "webp"
-    ? img.webp({ quality, effort: 6, smartSubsample: true }).toBuffer()
-    : img.avif({ quality, effort: 6 }).toBuffer();
+  if (format === "webp") return img.webp({ quality, effort: 6, smartSubsample: true }).toBuffer();
+  // En planos, color completo (4:4:4): el submuestreo 4:2:0 empaña líneas finas en zonas saturadas.
+  if (format === "jpg") return img.jpeg({ quality, mozjpeg: true, ...(plan ? { chromaSubsampling: "4:4:4" } : {}) }).toBuffer();
+  return img.avif({ quality, effort: 6 }).toBuffer();
 }
 
-async function best(ref, format) {
+async function best(ref, format, target, plan = false) {
   const refY = await lumaOf(ref);
   const refRgb = await rawOf(ref);
-  const qs = format === "webp" ? WEBP_Q : AVIF_Q;
+  const qs = format === "webp" ? WEBP_Q : format === "jpg" ? JPEG_Q : AVIF_Q;
   let last;
   for (const q of qs) {
-    const buf = await encode(ref, format, q);
+    const buf = await encode(ref, format, q, plan);
     const db = psnr(refY, await lumaOf(buf));
     last = { buf, q, db };
-    if (db >= TARGET_DB) break;
+    if (db >= target) break;
   }
   last.dbRgb = psnr(refRgb, await rawOf(last.buf));
-  return last.db >= TARGET_DB ? last : { ...last, belowTarget: true };
+  return last.db >= target ? last : { ...last, belowTarget: true };
 }
 
 // Recorte de 100 % con más detalle (para la hoja comparativa).
@@ -106,12 +112,15 @@ async function main() {
     totalSrc += srcSize;
     const row = { original: f, size: `${meta.width}x${meta.height}`, kb: kb(srcSize), outputs: [] };
 
-    for (const w of WIDTHS) {
+    const target = /zonific/i.test(f.normalize("NFC")) ? TARGET_DB_PLAN : TARGET_DB;
+    const widths = meta.width > WIDTHS[0] ? [meta.width, ...WIDTHS] : WIDTHS;
+    const avifWidths = meta.width > WIDTHS[0] ? [meta.width, WIDTHS[0]] : AVIF_WIDTHS;
+    for (const w of widths) {
       const width = Math.min(w, meta.width);
       const ref = await sharp(src).resize({ width, kernel: "lanczos3" }).png().toBuffer();
-      const formats = AVIF_WIDTHS.includes(w) ? ["webp", "avif"] : ["webp"];
+      const formats = [...(w === widths[0] ? ["jpg"] : []), "webp", ...(avifWidths.includes(w) ? ["avif"] : [])];
       for (const format of formats) {
-        const r = await best(ref, format);
+        const r = await best(ref, format, target, target === TARGET_DB_PLAN);
         const name = `${base}-${w}.${format}`;
         writeFileSync(path.join(OUT, name), r.buf);
         totalOut += r.buf.length;
@@ -162,7 +171,7 @@ async function main() {
 
   // Informe
   let md = `# Renders optimizados para web\n\nOrigen: \`IMAGENES RENDER/IMAGENES OPTMINZAR\` (sin modificar).\n`;
-  md += `Criterio: menor calidad con fidelidad de luminancia >= ${TARGET_DB} dB (PSNR-Y) frente al original al mismo tamaño. Se indica también el PSNR en RGB (incluye el submuestreo de color propio de WebP/AVIF). Sin ampliaciones.\n\n`;
+  md += `Criterio: menor calidad con fidelidad de luminancia >= ${TARGET_DB} dB (PSNR-Y; ${TARGET_DB_PLAN} dB en planos) frente al original al mismo tamaño. Se indica también el PSNR en RGB (incluye el submuestreo de color propio de WebP/AVIF). Sin ampliaciones.\n\n`;
   md += `| Original | Dimensiones | Peso | Archivo generado | Ancho | Calidad | PSNR (dB) | Peso |\n|---|---|---|---|---|---|---|---|\n`;
   for (const r of report) {
     r.outputs.forEach((o, i) => {

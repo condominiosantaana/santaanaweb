@@ -23,13 +23,13 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .image {
-    animation: settle 2.4s var(--ease-out) both;
+    animation: settle 1.8s var(--ease-out) both;
   }
 }
 
 @keyframes settle {
   from {
-    transform: scale(1.06);
+    transform: scale(1.03);
   }
   to {
     transform: scale(1);
@@ -95,7 +95,7 @@
   .text,
   .location,
   .buttons {
-    animation: rise 1s var(--ease-out) both;
+    animation: rise 0.8s var(--ease-out) both;
   }
   .title {
     animation-delay: 0.12s;
@@ -114,7 +114,7 @@
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
   }
 }
 

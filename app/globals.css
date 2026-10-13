@@ -342,23 +342,49 @@ p {
   border-bottom: 1px solid currentColor;
 }
 
-/* ========== aparición al desplazarse ========== */
+/* ========== aparición al desplazarse ==========
+   Una sola vez por elemento (RevealObserver). Solo opacity y transform. Sin JavaScript o con
+   movimiento reducido, el contenido se muestra directamente. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   [data-reveal] {
+    --reveal-shift: 14px;
+    --reveal-duration: 0.7s;
+    --reveal-stagger: 1;
     opacity: 0;
-    transform: translateY(24px);
+    transform: translate3d(0, var(--reveal-shift), 0);
     transition:
-      opacity 0.9s var(--ease-out),
-      transform 0.9s var(--ease-out);
-    transition-delay: var(--reveal-delay, 0ms);
+      opacity var(--reveal-duration) var(--ease-out),
+      transform var(--reveal-duration) var(--ease-out);
+    transition-delay: calc(var(--reveal-delay, 0ms) * var(--reveal-stagger));
   }
+  /* Imágenes: aparición con una escala casi imperceptible */
   [data-reveal="image"] {
-    transform: translateY(0) scale(1.03);
-    transition-duration: 1.2s;
+    --reveal-shift: 12px;
+    --reveal-duration: 0.85s;
+    transform: translate3d(0, var(--reveal-shift), 0) scale(1.015);
+  }
+  /* Planos: sin escala, para no alterar su lectura */
+  [data-reveal="plan"] {
+    --reveal-shift: 10px;
+    --reveal-duration: 0.8s;
   }
   [data-reveal].is-visible {
     opacity: 1;
     transform: none;
+  }
+
+  /* Móvil: versión más ligera (menos desplazamiento, menos duración y retrasos a la mitad) */
+  @media (max-width: 767px) {
+    [data-reveal],
+    [data-reveal="image"],
+    [data-reveal="plan"] {
+      --reveal-shift: 8px;
+      --reveal-duration: 0.5s;
+      --reveal-stagger: 0.5;
+    }
+    [data-reveal="image"] {
+      transform: translate3d(0, var(--reveal-shift), 0);
+    }
   }
 }
 

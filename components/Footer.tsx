@@ -9,14 +9,14 @@ export default function Footer() {
   return (
     <footer className={`on-dark ${styles.footer}`}>
       <div className={`container ${styles.top}`}>
-        <div className={styles.brand}>
+        <div className={styles.brand} data-reveal>
           <Link href="/#inicio" className={styles.logo} aria-label={`${SITE.name}, ir al inicio`}>
             <Image src={logoIvory} alt="" sizes="180px" />
           </Link>
           <p className={styles.slogan}>{SITE.slogan}</p>
         </div>
 
-        <div className={styles.col}>
+        <div className={styles.col} data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
           <h2 className={styles.heading}>Sala de ventas</h2>
           <p>{SITE.salesRoom}</p>
           <p>
@@ -33,7 +33,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <nav className={styles.col} aria-label="Secciones">
+        <nav className={styles.col} aria-label="Secciones" data-reveal style={{ "--reveal-delay": "160ms" } as React.CSSProperties}>
           <h2 className={styles.heading}>Navegación</h2>
           <ul>
             {NAV.map((item) => (
@@ -44,7 +44,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <nav className={styles.col} aria-label="Legal">
+        <nav className={styles.col} aria-label="Legal" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
           <h2 className={styles.heading}>Legal</h2>
           <ul>
             {LEGAL_LINKS.map((item) => (

@@ -1,6 +1,8 @@
+import { PLANS } from "@/lib/images";
 import { LOTS, whatsappLink } from "@/lib/site";
 import Counter from "./Counter";
 import { ArrowRight, Home, Plan, Store } from "./Icons";
+import PlanViewer from "./PlanViewer";
 import styles from "./Implantation.module.css";
 
 const PLAN_MESSAGE =
@@ -23,6 +25,23 @@ export default function Implantation() {
             naturaleza y la ciudad.
           </p>
         </header>
+
+        <div className={styles.zoning}>
+          <PlanViewer plans={PLANS}>
+            <div className={styles.zoningText}>
+              <h3 className="title-md" data-reveal>
+                Zonificación
+              </h3>
+              <p data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
+                Conoce la distribución de Santa ANA Condominio Campestre y descubre cómo se organizan sus espacios
+                residenciales, comerciales y zonas comunes.
+              </p>
+              <p className={styles.zoningNote} data-reveal style={{ "--reveal-delay": "140ms" } as React.CSSProperties}>
+                En la planta, el límite del proyecto se indica con línea punteada. Pulsa cada imagen para ampliarla.
+              </p>
+            </div>
+          </PlanViewer>
+        </div>
 
         <div className={styles.lots}>
           <article className={styles.lot} data-reveal aria-labelledby="lote-vivienda">

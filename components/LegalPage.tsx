@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "./Header";
 import Footer from "./Footer";
 import WhatsAppButton from "./WhatsAppButton";
+import RevealObserver from "./RevealObserver";
 import { LEGAL_LINKS } from "@/lib/site";
 import styles from "./LegalPage.module.css";
 
@@ -56,6 +57,7 @@ export default function LegalPage({ title, updated, current, children }: Props) 
       </main>
       <Footer />
       <WhatsAppButton />
+      <RevealObserver />
     </>
   );
 }

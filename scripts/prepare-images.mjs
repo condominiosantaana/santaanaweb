@@ -26,6 +26,13 @@ const renders = {
   "Parque al atardecer bajo la pérgola verde.png": "parque-pergola.webp",
   "Cancha tropical al atardecer.png": "cancha-padel.webp",
   "Capilla tropical al atardecer.png": "oratorio.webp",
+  "ZONA-SOCIAL-NUEVA-1.jpg": "zona-social-pabellon.webp",
+};
+
+// Planos de zonificación (2688 × 1790). Se conserva la resolución completa para poder ampliarlos.
+const planos = {
+  "zonificación-1.jpg": "zonificacion-planta.webp",
+  "zonificación-2.jpg": "zonificacion-aerea.webp",
 };
 
 // Fotografías de ambiente (no muestran instalaciones del proyecto).
@@ -53,12 +60,18 @@ async function recolor(input, { r, g, b }) {
 async function main() {
   await mkdir(out("public", "images", "renders"), { recursive: true });
   await mkdir(out("public", "images", "paisaje"), { recursive: true });
+  await mkdir(out("public", "images", "implantacion"), { recursive: true });
   await mkdir(out("public", "brand"), { recursive: true });
 
   for (const [src, dest] of Object.entries(renders)) {
     await sharp(path.join(RENDER_SRC, src))
       .webp({ quality: 95, effort: 6, smartSubsample: true })
       .toFile(out("public", "images", "renders", dest));
+  }
+  for (const [src, dest] of Object.entries(planos)) {
+    await sharp(path.join(RENDER_SRC, src))
+      .webp({ quality: 95, effort: 6, smartSubsample: true })
+      .toFile(out("public", "images", "implantacion", dest));
   }
   for (const [src, dest] of Object.entries(paisajes)) {
     await sharp(out("IMAGENES INSPIRACION", src))

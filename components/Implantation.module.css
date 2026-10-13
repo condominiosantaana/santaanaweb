@@ -154,3 +154,51 @@
     gap: 32px;
   }
 }
+
+/* Zonificación */
+.zoning {
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+
+.zoningText {
+  display: grid;
+  gap: 12px;
+  color: var(--ink-soft);
+}
+
+.zoningText h3 {
+  color: var(--ink);
+}
+
+.zoningNote {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  padding-left: 14px;
+  border-left: 1px solid var(--sand);
+}
+
+/* Escritorio: tarjetas de lotes más compactas, manteniendo la cifra como elemento principal */
+@media (min-width: 1024px) {
+  .lot {
+    gap: 12px;
+    padding: 30px 36px 32px;
+  }
+  .icon {
+    width: 46px;
+    height: 46px;
+  }
+  .count {
+    font-size: clamp(4.5rem, 6.4vw, 6rem);
+  }
+  .lotTitle {
+    font-size: 1.7rem;
+  }
+  .range {
+    margin-top: 4px;
+    padding-top: 16px;
+  }
+  .range dd {
+    margin-top: 4px;
+    font-size: 1.6rem;
+  }
+}

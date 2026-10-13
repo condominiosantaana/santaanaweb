@@ -49,6 +49,8 @@ no se modifican.
   AVIF/WebP al tamaño de cada pantalla.
 - `node scripts/optimize-renders.mjs` genera variantes independientes (WebP 1536/1024/640/320 y AVIF 1536/1024).
   También crea un informe y una hoja comparativa en `IMAGENES RENDER/IMAGENES OPTIMIZADAS WEB`.
+- Los planos de zonificación (`zonificación-1.jpg` y `zonificación-2.jpg`) se publican en
+  `public/images/implantacion/` a su resolución completa (2688 px) para poder ampliarlos en el visor.
 - Si llegan renders de mayor resolución, póngalos en `IMAGENES OPTMINZAR` con el mismo nombre y vuelva a ejecutar
   ambos scripts.
 
@@ -67,4 +69,4 @@ precompletado. El sitio no guarda datos personales.
 - Confirmar por escrito la capacidad de 150 personas de la zona social y, si procede, activar
   `SHOW_SOCIAL_CAPACITY` en `lib/site.ts`.
 - Renders en mayor resolución (los actuales miden ~920–1075 px de ancho).
-- Plano de implantación oficial, si se desea publicar.
+- Plano de implantación con numeración de lotes, si se desea publicar (los planos de zonificación actuales son renders sin rótulos).

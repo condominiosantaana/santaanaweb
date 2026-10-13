@@ -10,6 +10,9 @@ import parqueInfantil from "@/public/images/renders/parque-infantil.webp";
 import parquePergola from "@/public/images/renders/parque-pergola.webp";
 import canchaPadel from "@/public/images/renders/cancha-padel.webp";
 import oratorio from "@/public/images/renders/oratorio.webp";
+import zonaSocialPabellon from "@/public/images/renders/zona-social-pabellon.webp";
+import zonificacionPlanta from "@/public/images/implantacion/zonificacion-planta.webp";
+import zonificacionAerea from "@/public/images/implantacion/zonificacion-aerea.webp";
 import llanoArbol from "@/public/images/paisaje/llano-arbol.jpg";
 import llanoFamilia from "@/public/images/paisaje/llano-familia.jpg";
 
@@ -82,6 +85,12 @@ export const PHOTOS = {
     caption: "Oratorio",
     kind: "render",
   },
+  zonaSocialPabellon: {
+    src: zonaSocialPabellon,
+    alt: "Render diurno del pabellón de la zona social, con muros de piedra, pérgola de madera y terraza con mobiliario exterior",
+    caption: "Pabellón de la zona social",
+    kind: "render",
+  },
   llanoArbol: {
     src: llanoArbol,
     alt: "Niño corriendo hacia un árbol en la llanura al atardecer",
@@ -98,6 +107,7 @@ export const PHOTOS = {
 
 export const GALLERY: Photo[] = [
   PHOTOS.lagoZonaSocial,
+  PHOTOS.zonaSocialPabellon,
   PHOTOS.arbolNativo,
   PHOTOS.salonSocialLago,
   PHOTOS.porteria,
@@ -109,4 +119,21 @@ export const GALLERY: Photo[] = [
   PHOTOS.oratorio,
 ];
 
-export const SOCIAL_GALLERY: Photo[] = [PHOTOS.lagoZonaSocial, PHOTOS.salonSocialLago, PHOTOS.terrazaPergola];
+// La vista del lago ya aparece en "Nosotros"; aquí la sustituye el render diurno del pabellón social.
+export const SOCIAL_GALLERY: Photo[] = [PHOTOS.zonaSocialPabellon, PHOTOS.salonSocialLago, PHOTOS.terrazaPergola];
+
+// Planos de zonificación: la planta es la imagen principal y la vista aérea, el complemento.
+export const PLANS: Photo[] = [
+  {
+    src: zonificacionPlanta,
+    alt: "Vista superior de la implantación del condominio: lotes con viviendas de referencia, vías internas y zonas comunes dentro del límite punteado del proyecto",
+    caption: "Planta de implantación",
+    kind: "render",
+  },
+  {
+    src: zonificacionAerea,
+    alt: "Vista aérea en perspectiva del condominio, con sus viviendas de referencia, vías internas y zonas verdes junto a la vía de acceso",
+    caption: "Vista aérea del conjunto",
+    kind: "render",
+  },
+];

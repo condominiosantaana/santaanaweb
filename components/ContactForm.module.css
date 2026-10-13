@@ -251,3 +251,45 @@
     margin-top: 2px;
   }
 }
+
+/* Escritorio: versión más compacta (los tamaños táctiles de móvil se mantienen) */
+@media (min-width: 1024px) {
+  .form {
+    gap: 12px;
+    padding: 24px 30px 26px;
+  }
+  .row {
+    gap: 12px 14px;
+  }
+  .field {
+    gap: 5px;
+  }
+  .field input,
+  .field textarea {
+    min-height: 42px;
+    padding: 8px 12px;
+  }
+  .field textarea {
+    min-height: 74px;
+  }
+  .fieldset {
+    gap: 6px;
+  }
+  .fieldset legend {
+    margin-bottom: 4px;
+  }
+  .option {
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 0.84rem;
+  }
+  .notice {
+    padding: 8px 12px;
+    font-size: 0.76rem;
+    line-height: 1.5;
+  }
+  .submit {
+    min-height: 46px;
+    padding-block: 11px;
+  }
+}
