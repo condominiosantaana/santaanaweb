@@ -10,12 +10,11 @@ const CONNECTIONS = [
   { icon: Services, label: "Servicios esenciales" },
 ];
 
-// No hay coordenadas oficiales del condominio. El mapa muestra una vista de Yopal y su entorno oriental
-// (centro y zoom, sin marcador) para orientar al visitante sin señalar un punto como la entrada del proyecto.
-// La búsqueda "Vía Sirivana, Yopal" de Google resuelve a una ficha de terceros, por eso no se usa.
-const MAP_VIEW = { lat: 5.345, lng: -72.37, zoom: 12 };
-const MAP_EMBED = `https://maps.google.com/maps?ll=${MAP_VIEW.lat},${MAP_VIEW.lng}&z=${MAP_VIEW.zoom}&t=m&hl=es&output=embed`;
-const MAP_LINK = `https://www.google.com/maps/@${MAP_VIEW.lat},${MAP_VIEW.lng},${MAP_VIEW.zoom}z`;
+// Ubicación oficial confirmada por el cliente: ficha de Google "Santa Ana Condominio Campestre"
+// (5.351234, -72.359857). El mapa insertado busca esa ficha, de modo que su marcador y su enlace
+// "Abrir en Maps" llevan al mismo lugar que el botón, que usa el enlace oficial compartido por el cliente.
+const MAP_EMBED = `https://maps.google.com/maps?q=${encodeURIComponent("Santa Ana Condominio Campestre, Yopal, Casanare")}&z=14&hl=es&output=embed`;
+const MAP_LINK = "https://maps.app.goo.gl/VaxeCX163dGWs8w49";
 
 export default function Location() {
   return (
@@ -51,11 +50,11 @@ export default function Location() {
         <aside className={styles.card} aria-label="Mapa y sala de ventas" data-reveal>
           <MapEmbed
             src={MAP_EMBED}
-            title="Mapa de referencia de Yopal y su entorno, en Google Maps"
+            title="Ubicación de Santa ANA Condominio Campestre en Google Maps"
             className={styles.map}
           />
           <p className={styles.mapNote}>
-            Vista de referencia de Yopal y su entorno. El mapa no señala la ubicación exacta del condominio.
+            Ubicación de Santa ANA Condominio Campestre en Google Maps.
           </p>
 
           <div className={styles.sales}>
