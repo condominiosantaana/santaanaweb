@@ -28,7 +28,7 @@ export default function Location() {
             Conectado con Yopal. En armonía con la naturaleza.
           </h2>
           <p className="lead" data-reveal style={{ "--reveal-delay": "160ms" } as React.CSSProperties}>
-            Localización estratégica sobre la vía Sirivana, a 10 minutos del casco urbano de Yopal y próximo a
+            Localización estratégica sobre la vía Sirivana, a 5 minutos del casco urbano de Yopal y próximo a
             equipamientos clave de la ciudad.
           </p>
           <p className={styles.nearby} data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
